@@ -1,8 +1,11 @@
 resources:
-  - name: S_HelmDeploy_0001_resource
-    type: PropertyBag
+  - name: S_HelmDeploy_FileSpec_0001_resource
+    type: FileSpec
     configuration:
-      runNumber: 0
+      sourceArtifactory: s_artifactory
+      pattern: >-
+        helmgeneric/
+      recursive: true
 
 pipelines:
   - name: pipeline_S_HelmDeploy_0001
@@ -10,10 +13,12 @@ pipelines:
       - name: S_HelmDeploy_0001
         type: HelmDeploy
         configuration:
+          chartPath: ./
+          helmVersion: 3
           releaseName: release
           integrations:
             - name: s_artifactory
             - name: s_kubernetes
           inputResources:
-            - name: S_HelmDeploy_0001_resource
+            - name: S_HelmDeploy_FileSpec_0001_resource
               newVersionOnly: true
