@@ -20,7 +20,7 @@ resources:
       gitProvider: s_gitHub
       path: {{ .Values.GitHub.Org_test_Automation_bash.path }}
       branches:
-        include: master
+        include: feature-PIPE-5949
 
 pipelines:
   - name: pipeline_S_LX_CreateReleaseBundle_5949_0004
